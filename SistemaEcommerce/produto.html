@@ -1,0 +1,91 @@
+<html lang="en" ng-app="produtoModule">
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Sistema Ecommerce</title>
+</head>
+
+<body ng-controller="produtoControl">
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="control/produtoControl.js"></script>
+    <div ng-include src="'menu.html'"></div>
+
+    <div class="card border-secondary mb-3">
+        <div class="card-header">Cadastro de Produtos</div>
+    </div>
+
+    <ul class="nav nav-tabs" id="produtoTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="cadastro-tab" data-toggle="tab" href="#cadastro" role="tab"
+                aria-controls="tabCadastro" aria-selected="true">Cadastro</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="dados-tab" data-toggle="tab" href="#dados" role="tab" aria-controls="tabDados"
+                aria-selected="false">Dados</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="produtoTabContent">
+        <div class="tab-pane fade show active" id="cadastro" role="tabpanel" aria-labelledby="cadastro-tab">
+            <br>
+            <button type="button" ng-click="novo()" class="btn btn-primary">Novo</button>
+            <button type="button" ng-click="salvar()" class="btn btn-success">Salvar</button>
+            <button type="button" ng-click="excluir()" class="btn btn-danger">Excluir</button>
+            <button type="button" ng-click="pesquisar()" class="btn btn-warning">Pesquisar</button>
+            <br> <br>
+            <form class="was-validated form-row">
+                <div class="col-md-1 mb-3">
+                    <label for="txtCodigo">C&oacute;digo</label>
+                    <input type="text" ng-model="produto.id" class="form-control" disabled id="txtCodigo">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label for="txtNome">Nome</label>
+                    <input type="text" ng-model="produto.nome" class="form-control is-valid" id="txtNome" required>
+                    <div class="invalid-feedback">
+                        Digite o nome.
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="txtNome">Preço</label>
+                    <input type="number" ng-model="produto.preco" class="form-control is-valid" id="txtPreco" required>
+                    <div class="invalid-feedback">
+                        Digite o Preço.
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="tab-pane fade" id="dados" role="tabDados" aria-labelledby="dados-tab">
+            <div role="tabpanel" class="tab-pane" id="dados">
+                <input type="text" ng-model="criterio" class="form-control"
+                    placeholder="O que voc&ecirc; est&aacute; procurando?" /><br />
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>C&oacute;digo</th>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="produtoTabela in produtos | filter:criterio"
+                            ng-click="seleciona(produtoTabela)">
+                            <td>{{produtoTabela.id}}</td>
+                            <td>{{produtoTabela.nome}}</td>
+                            <td>{{produtoTabela.preco}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span ng-show="(produtos | filter: criterio).length == 0">Infelizmente
+                    n&atilde;o temos o que voc&ecirc; est&aacute; procurando</span>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>
