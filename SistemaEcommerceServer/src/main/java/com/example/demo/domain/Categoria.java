@@ -17,25 +17,24 @@ public class Categoria implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	private Integer codigo;
 	private String nome;
 		
 	public Categoria() {
-		// TODO Auto-generated constructor stub
+
 	}
 
-	public Categoria(Integer id, String nome) {
-		super();
-		this.id = id;
+	public Categoria(Integer codigo, String nome) {
+		this.codigo = codigo;
 		this.nome = nome;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getCodigo() {
+		return codigo;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNome() {
@@ -48,7 +47,7 @@ public class Categoria implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nome=" + nome + "]";
+		return "Categoria [codigo=" + codigo + ", nome=" + nome + "]";
 	}
 	
 }

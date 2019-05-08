@@ -2,7 +2,6 @@
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -26,7 +24,7 @@ import com.example.demo.repositories.CategoriaRepository;
 
 @RestController
 @RequestMapping(value="/categorias")
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoriaResource {
 	
 	@Autowired
@@ -42,7 +40,7 @@ public class CategoriaResource {
 	public ResponseEntity<?> salvar(@Valid @RequestBody Categoria categoria) {
 		service.save(categoria);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-		        .buildAndExpand(categoria.getId()).toUri();
+		        .buildAndExpand(categoria.getCodigo()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
@@ -62,10 +60,10 @@ public class CategoriaResource {
 		}
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+/*	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Optional<Categoria> obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-
+*/
 }

@@ -26,7 +26,7 @@ import com.example.demo.repositories.ProdutoRepository;
 
 @RestController
 @RequestMapping(value="/produtos")
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProdutoResource {
 	
 	@Autowired
@@ -42,7 +42,7 @@ public class ProdutoResource {
 	public ResponseEntity<?> salvar(@Valid @RequestBody Produto produto) {
 		service.save(produto);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-		        .buildAndExpand(produto.getId()).toUri();
+		        .buildAndExpand(produto.getCodigo()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
